@@ -1,20 +1,59 @@
-# Lab Assignment 3: The Exam Scheduler Service (`bswe4123`)
-
-This project implements the **Exam Scheduler Service** using FastAPI and `httpx`, integrated with a **Room Booking Service** running on a separate port.
-
-## Architecture & Services
-- `room_booking.py`: Room Booking Service running on `http://127.0.0.1:8001` (supports `BOOKING_DELAY_SECONDS`).
-- `scheduler.py`: Exam Scheduler Service running on `http://127.0.0.1:8002` with `GET /config` and `POST /exams`.
-
-## Environment Variables
-- `ROOM_BOOKING_URL` (default: `http://127.0.0.1:8001`)
-- `REQUEST_TIMEOUT` (default: `2.0`)
-- `MAX_RETRIES` (default: `3`)
-- `BOOKING_DELAY_SECONDS` (default: `0`)
-
-## Running the Services
-
-### 1. Install dependencies
-```bash
-pip install fastapi uvicorn httpx```
-
+[17:51:03] svc-8001: UP (18.5ms) | svc-8002: SLOW (804.3ms) | svc-8003: UP (12.4ms)
+[17:51:05] svc-8001: UP (5.2ms) | svc-8002: SLOW (808.9ms) | svc-8003: UP (5.5ms)
+[17:51:07] svc-8001: UP (4.7ms) | svc-8002: SLOW (808.2ms) | svc-8003: UP (2.6ms)
+[17:51:09] svc-8001: UP (7.5ms) | svc-8002: SLOW (809.2ms) | svc-8003: UP (4.2ms)
+[17:51:11] svc-8001: UP (18.5ms) | svc-8002: SLOW (809.9ms) | svc-8003: UP (4.2ms)
+[17:51:13] svc-8001: UP (4.4ms) | svc-8002: SLOW (814.9ms) | svc-8003: UP (13.7ms)
+[17:51:15] svc-8001: UP (19.7ms) | svc-8002: SLOW (814.8ms) | svc-8003: UP (44.4ms)
+[17:51:17] svc-8001: UP (6.4ms) | svc-8002: SLOW (806.8ms) | svc-8003: UP (4.2ms)
+[17:51:19] svc-8001: UP (8.4ms) | svc-8002: SLOW (838.6ms) | svc-8003: UP (48.6ms)
+[17:51:21] svc-8001: UP (49.4ms) | svc-8002: SLOW (803.7ms) | svc-8003: UP (8.0ms)
+[17:51:23] svc-8001: UP (58.1ms) | svc-8002: SLOW (833.4ms) | svc-8003: UP (5.5ms)
+[17:51:25] svc-8001: UP (17.0ms) | svc-8002: SLOW (873.9ms) | svc-8003: UP (42.2ms)[17:51:27] svc-8001: UP (10.0ms) | svc-8002: SLOW (810.6ms) | svc-8003: UP (16.7ms)
+[17:51:30] svc-8001: UP (36.9ms) | svc-8002: SLOW (804.3ms) | svc-8003: UP (7.8ms)
+[17:51:32] svc-8001: UP (9.4ms) | svc-8002: SLOW (809.9ms) | svc-8003: UP (9.0ms)
+[17:51:34] svc-8001: UP (3.0ms) | svc-8002: SLOW (805.0ms) | svc-8003: UP (5.6ms)
+[17:51:36] svc-8001: UP (51.3ms) | svc-8002: SLOW (803.3ms) | svc-8003: UP (64.0ms)
+[17:51:38] svc-8001: UP (10.4ms) | svc-8002: SLOW (803.5ms) | svc-8003: UP (32.8ms)
+[17:51:40] svc-8001: UP (12.0ms) | svc-8002: RETRY (1/3) | svc-8003: UP (117.2ms)
+[17:51:42] svc-8001: UP (35.0ms) | svc-8002: SLOW (814.1ms) | svc-8003: UP (3.7ms)
+[17:51:44] svc-8001: UP (8.0ms) | svc-8002: SLOW (804.0ms) | svc-8003: UP (68.0ms)
+[17:51:46] svc-8001: UP (45.9ms) | svc-8002: SLOW (804.5ms) | svc-8003: UP (5.7ms)
+[17:51:48] svc-8001: UP (110.2ms) | svc-8002: SLOW (969.4ms) | svc-8003: UP (64.5ms)
+[17:51:50] svc-8001: UP (11.3ms) | svc-8002: SLOW (804.1ms) | svc-8003: UP (11.6ms)
+[17:51:52] svc-8001: UP (8.8ms) | svc-8002: SLOW (803.1ms) | svc-8003: UP (3.0ms)
+[17:51:54] svc-8001: UP (9.3ms) | svc-8002: SLOW (805.1ms) | svc-8003: UP (7.9ms)
+[17:51:56] svc-8001: UP (8.7ms) | svc-8002: SLOW (804.5ms) | svc-8003: UP (8.7ms)
+[17:51:58] svc-8001: UP (195.1ms) | svc-8002: SLOW (835.4ms) | svc-8003: UP (12.0ms)
+[17:52:00] svc-8001: UP (4.5ms) | svc-8002: SLOW (814.9ms) | svc-8003: UP (13.5ms)
+[17:52:02] svc-8001: UP (14.0ms) | svc-8002: SLOW (822.6ms) | svc-8003: UP (16.6ms)
+[17:52:04] svc-8001: UP (7.5ms) | svc-8002: SLOW (815.3ms) | svc-8003: UP (16.2ms)
+[17:52:06] svc-8001: UP (4.1ms) | svc-8002: SLOW (806.1ms) | svc-8003: UP (3.8ms)
+[17:52:08] svc-8001: UP (3.1ms) | svc-8002: SLOW (812.9ms) | svc-8003: UP (4.5ms)
+[17:52:10] svc-8001: UP (4.4ms) | svc-8002: SLOW (821.2ms) | svc-8003: UP (8.1ms)
+[17:52:12] svc-8001: UP (4.6ms) | svc-8002: SLOW (808.0ms) | svc-8003: UP (4.4ms)
+[17:52:14] svc-8001: UP (2.8ms) | svc-8002: SLOW (808.6ms) | svc-8003: UP (7.9ms)
+[17:52:16] svc-8001: UP (10.3ms) | svc-8002: SLOW (809.2ms) | svc-8003: UP (15.0ms)
+[17:52:18] svc-8001: UP (14.4ms) | svc-8002: SLOW (806.7ms) | svc-8003: UP (6.1ms)
+[17:52:20] svc-8001: UP (3.2ms) | svc-8002: SLOW (809.3ms) | svc-8003: UP (17.7ms)
+[17:52:22] svc-8001: UP (4.4ms) | svc-8002: SLOW (819.9ms) | svc-8003: UP (5.1ms)
+[17:52:24] svc-8001: UP (3.3ms) | svc-8002: SLOW (803.4ms) | svc-8003: UP (2.0ms)
+[17:52:26] svc-8001: UP (4.8ms) | svc-8002: SLOW (805.8ms) | svc-8003: UP (8.7ms)
+[17:52:28] svc-8001: UP (4.3ms) | svc-8002: SLOW (804.5ms) | svc-8003: UP (10.2ms)
+[17:52:30] svc-8001: UP (15.9ms) | svc-8002: SLOW (809.3ms) | svc-8003: UP (3.8ms)
+[17:52:32] svc-8001: UP (6.5ms) | svc-8002: SLOW (822.0ms) | svc-8003: UP (31.6ms)
+[17:52:34] svc-8001: UP (9.0ms) | svc-8002: SLOW (804.7ms) | svc-8003: UP (2.9ms)
+[17:52:36] svc-8001: UP (26.7ms) | svc-8002: SLOW (814.6ms) | svc-8003: UP (6.7ms)
+[17:52:38] svc-8001: UP (9.5ms) | svc-8002: SLOW (805.0ms) | svc-8003: UP (8.4ms)
+[17:52:40] svc-8001: UP (12.8ms) | svc-8002: SLOW (816.9ms) | svc-8003: UP (3.2ms)
+[17:52:42] svc-8001: UP (42.0ms) | svc-8002: SLOW (804.1ms) | svc-8003: UP (63.6ms)
+[17:52:44] svc-8001: UP (5.9ms) | svc-8002: SLOW (942.0ms) | svc-8003: UP (132.9ms)
+[17:52:46] svc-8001: UP (132.2ms) | svc-8002: SLOW (826.6ms) | svc-8003: UP (9.0ms)
+[17:52:48] svc-8001: UP (274.7ms) | svc-8002: SLOW (839.9ms) | svc-8003: UP (26.1ms)
+[17:52:50] svc-8001: UP (117.2ms) | svc-8002: SLOW (869.5ms) | svc-8003: UP (162.9ms)
+[17:52:52] svc-8001: UP (58.1ms) | svc-8002: RETRY (1/3) | svc-8003: SLOW (581.2ms)
+[17:52:54] svc-8001: UP (21.9ms) | svc-8002: SLOW (824.5ms) | svc-8003: UP (9.6ms)
+[17:52:56] svc-8001: UP (2.8ms) | svc-8002: SLOW (805.2ms) | svc-8003: UP (4.9ms)
+[17:52:58] svc-8001: UP (2.9ms) | svc-8002: SLOW (803.6ms) | svc-8003: UP (10.5ms)
+[17:53:00] svc-8001: UP (16.6ms) | svc-8002: SLOW (804.9ms) | svc-8003: UP (11.4ms)
+[17:53:02] svc-8001: UP (3.1ms) | svc-8002: SLOW (811.8ms) | svc-8003: UP (3.6ms)
